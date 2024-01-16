@@ -2,9 +2,6 @@
 
 B-Tree Visualization with GUI using JavaFX
 
-Made as a part of CSD Course Principles of Programming Languages at Shiv Nadar University
-
-Inspiration- https://www.cs.usfca.edu/~galles/visualization/BTree.htm
 
 # Features
 
