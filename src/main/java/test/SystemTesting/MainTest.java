@@ -21,11 +21,7 @@ public class MainTest extends ApplicationTest {
         new Main().start(primaryStage);
     }
 
-    @BeforeEach
-    public void setUp() throws Exception {
-        // Setup test conditions before each test, if needed
-    }
-
+   
     @AfterEach
     public void tearDown() throws Exception {
         // Cleanup after each test, if needed
