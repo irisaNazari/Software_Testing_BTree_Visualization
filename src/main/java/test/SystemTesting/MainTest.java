@@ -24,7 +24,6 @@ public class MainTest extends ApplicationTest {
    
     @AfterEach
     public void tearDown() throws Exception {
-        // Cleanup after each test, if needed
         FxToolkit.hideStage();
         release(new KeyCode[]{});
         release(new MouseButton[]{});
