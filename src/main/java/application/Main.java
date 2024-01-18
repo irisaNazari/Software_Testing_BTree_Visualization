@@ -53,6 +53,10 @@ public class Main extends Application {
     ComboBox dropDownMenu = new ComboBox(FXCollections.observableArrayList(orderValue));
 
     public static Stage getPrimaryStage() {
+         // create and return a Stage object
+    Stage stage = new Stage();
+    // perform any necessary configurations or setups for the stage
+    return stage;
     }
 
     public void setOrder(int x){
