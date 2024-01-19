@@ -5,7 +5,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit5.ApplicationTest;
@@ -20,10 +19,10 @@ public class MainTest extends ApplicationTest {
     public void start(Stage primaryStage) {
         new Main().start(primaryStage);
     }
-
-   
+    
     @AfterEach
     public void tearDown() throws Exception {
+        // Cleanup after each test, if needed
         FxToolkit.hideStage();
         release(new KeyCode[]{});
         release(new MouseButton[]{});
@@ -31,7 +30,7 @@ public class MainTest extends ApplicationTest {
 
     @Test
     public void testInsertion() {
-        clickOn("#keyText").write("42");
+        clickOn("#InsertBut").write("42");
         clickOn("#insertButton");
         verifyThat("#historyText", isVisible());
         verifyThat("#historyText", hasText(">>>Added Node: 42"));
@@ -39,7 +38,7 @@ public class MainTest extends ApplicationTest {
 
     @Test
     public void testDeletion() {
-        clickOn("#keyText").write("42");
+        clickOn("#DeleteBut").write("42");
         clickOn("#deleteButton");
         verifyThat("#historyText", isVisible());
         verifyThat("#historyText", hasText("Deleted Node: 42"));
@@ -47,7 +46,7 @@ public class MainTest extends ApplicationTest {
 
     @Test
     public void testSearch() {
-        clickOn("#keyText").write("42");
+        clickOn("#SearchBut").write("42");
         clickOn("#searchButton");
         verifyThat("#historyText", isVisible());
         verifyThat("#historyText", hasText(">>>Searching Node: 42"));
@@ -71,7 +70,7 @@ public class MainTest extends ApplicationTest {
 
     @Test
     public void testInvalidInput() {
-        clickOn("#keyText").write("InvalidInput");
+        clickOn("#InvalidInput").write("InvalidInput");
         clickOn("#insertButton");
         verifyThat("#historyText", isVisible());
         verifyThat("#historyText", hasText("Illegal input data!"));
@@ -79,22 +78,22 @@ public class MainTest extends ApplicationTest {
 
     @Test
     public void testEmptyInput() {
-        clickOn("#insertButton");
+        clickOn("#InsertBut");
         verifyThat("#historyText", isVisible());
         verifyThat("#historyText", hasText("No data entered!"));
 
-        clickOn("#deleteButton");
+        clickOn("#deleteBut");
         verifyThat("#historyText", isVisible());
         verifyThat("#historyText", hasText("No data entered!"));
 
-        clickOn("#searchButton");
+        clickOn("#searchBut");
         verifyThat("#historyText", isVisible());
         verifyThat("#historyText", hasText("No data entered!"));
     }
 
     @Test
     public void testSearchNotFound() {
-        clickOn("#keyText").write("999");
+        clickOn("#SearchBut").write("999");
         clickOn("#searchButton");
         verifyThat("#historyText", isVisible());
         verifyThat("#historyText", hasText("Not in the tree!"));
@@ -103,17 +102,17 @@ public class MainTest extends ApplicationTest {
     @Test
     public void testMultipleInsertions() {
         // Test inserting multiple nodes
-        clickOn("#keyText").write("42");
+        clickOn("#InsertBut").write("42");
         clickOn("#insertButton");
         verifyThat("#historyText", isVisible());
         verifyThat("#historyText", hasText(">>>Added Node: 42"));
 
-        clickOn("#keyText").write("30");
+        clickOn("#InsertBut").write("30");
         clickOn("#insertButton");
         verifyThat("#historyText", isVisible());
         verifyThat("#historyText", hasText(">>>Added Node: 30"));
 
-        clickOn("#keyText").write("55");
+        clickOn("#InsertBut").write("55");
         clickOn("#insertButton");
         verifyThat("#historyText", isVisible());
         verifyThat("#historyText", hasText(">>>Added Node: 55"));
@@ -122,7 +121,7 @@ public class MainTest extends ApplicationTest {
     @Test
     public void testDeletionNotFound() {
         // Test deleting a node that is not in the tree
-        clickOn("#keyText").write("999");
+        clickOn("#DeleteBut").write("999");
         clickOn("#deleteButton");
         verifyThat("#historyText", isVisible());
         verifyThat("#historyText", hasText("Node not found for deletion: 999"));
@@ -131,9 +130,10 @@ public class MainTest extends ApplicationTest {
     @Test
     public void testSearchEmptyTree() {
         // Test searching in an empty tree
-        clickOn("#keyText").write("42");
+        clickOn("#SearchBut").write("42");
         clickOn("#searchButton");
         verifyThat("#historyText", isVisible());
         verifyThat("#historyText", hasText("Tree is empty. Cannot search."));
     }
+
 }
